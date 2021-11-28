@@ -1,0 +1,47 @@
+John wishes to automate this process fully.
+
+Step 1: let us go online, and find this basic code on how to send email. This is not the final code since our objective is to be able to send multiple emails at once to different people, while this example hardcodes only one email
+
+We will be using the win32com package which is useful for interfacing with Microsoft products. You probably do not need to install this package as it should be a default package in your python, just like the data analysis library pandas.
+
+The code that we used is: download link
+
+
+### Add code libraries we are going to use with import statements.  
+# win32com is the package used to call Outlook. 
+###
+
+import win32com.client                            
+
+### Create an outlook Email.  
+# win32com.client.Dispatch = Tell windows to open outlook.
+# CreateItem(0) = Create an email for sending. 
+###
+
+o=win32com.client.Dispatch("Outlook.Application")
+msg=o.CreateItem(0)                               
+
+### Format required email information.
+# Now we format the email with all the standard information.
+# to = List of addresses we are sending to.  
+# Subject = The Subject Line of the email. 
+# Body = The body of the email in plain text.  
+###
+
+msg.to="email@example.com"
+msg.Subject="This is a test"
+msg.Body="Hi, this is your email"
+
+### Adding an attachment. 
+# Define the attachment variable. 
+#   The r before the "filename" means plain text.
+# Attachments.Add = Add the file from your local computer. 
+###
+
+msg.Attachments.Add(r'C:\Users\name\Downloads\data_report.csv')
+
+### Send the message 
+# Now that the message is ready, it is time to send it. 
+###
+
+msg.Send()
